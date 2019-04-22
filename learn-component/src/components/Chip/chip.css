@@ -1,0 +1,31 @@
+.chip-bg{
+    width: 80px;
+    height: 32px;
+    border-radius: 16px;
+    text-align: center;
+    color: #fff;
+    line-height: 32px;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+.pass{
+    color: #fff;
+    background: #0fb600;
+}
+
+.fail{
+    color: #fff;
+    background: red;
+}
+
+.untested{
+    color: black;
+    background: #c4c4c4;
+}
+
+.tag {
+    margin-bottom: 24px;
+}
+
+
