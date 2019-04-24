@@ -93,6 +93,7 @@ const getImage = id =>
           })
           .select("_id title description createdAt view like comment")
           .populate("createdBy", "username avatarUrl")
+          .populate("comment.createdBy")
           .exec()
       )
       .then(data =>
@@ -111,6 +112,7 @@ const getImageData = id =>
         _id: id
       })
       .select("image contentType")
+      .populate("comment.createdBy")
       .exec()
       .then(data => resolve(data))
       .catch(err => reject(err));
@@ -118,6 +120,9 @@ const getImageData = id =>
 
 const addComment = (imageId, { userId, content }) =>
   new Promise((resolve, reject) => {
+    console.log("User id")
+    console.log(userId);
+    console
     imageModel
       .update(
         {

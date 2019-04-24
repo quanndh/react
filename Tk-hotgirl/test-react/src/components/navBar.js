@@ -7,9 +7,8 @@ class NavBav extends Component{
     render() {
         const {onSearchChange, onLogin, username} = this.props;
         return (
-            <div className="navbar navbar-expand">
+            <div className="navbar navbar-expand mb-2">
                 <div className="container">
-                
                     <SearchField 
                         onSearchChange={onSearchChange}/>
                     <div className="col-6 text-center">

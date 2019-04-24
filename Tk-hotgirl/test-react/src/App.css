@@ -5,3 +5,16 @@ body{
 .navbar{
     background: #ffffff;
 }
+
+.girl_image{
+    background: #ffffff;
+}
+
+.girl_image h4:hover {
+    text-decoration: none;
+}
+
+.row{
+    background: #ffffff;
+}
+

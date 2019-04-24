@@ -1,31 +1,15 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
-import NavBar from "./components/navBar.js";
 import axios from "./axios";
-import MainContain from "./components/MainContain";
+import HomeScreen from './container/HomeScreen';
+import DetailScreen from './container/DetailScreen';
+import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 
 class App extends Component {
-  state = {
-    images: [],
-    search: "",
-    username: "",
-    id: ""
-  }
+  state={
 
-  componentDidMount() {
-    axios.get("/api/images")
-      .then(data => {
-        console.log(data.data);
-        this.setState({
-          images: data.data,
-        })
-      })
-      .catch(err => console.error(err));
-    
   }
-
-  onSearchChange = text => this.setState({search: text});
 
   onLogin = () => {
     axios
@@ -34,6 +18,7 @@ class App extends Component {
         password: "123456"
       })
       .then(res => {
+        console.log(res);
         this.setState({
           username: res.data.username,
           id: res.data.id
@@ -43,21 +28,24 @@ class App extends Component {
   }
 
   render() {
-
-    const {images, search, username, password} = this.state;
-    const displayImg = images.filter(img => img.title.includes(search) )
-
     return (
-      <div className="App">
-
-        <NavBar 
-          onSearchChange={this.onSearchChange}
-          onLogin={this.onLogin}
-          username={username}
-          password={password}/>
-        <MainContain img={displayImg}/>
-        
-      </div>
+      <Router >
+        <div className="App">
+            <Route exact path="/" render={props => {
+              return <HomeScreen 
+                {...props} 
+                username={this.state.username} 
+                onLogin={this.onLogin} />
+            }}/> 
+            <Route path="/images/:imageId" render={props => {
+              return <DetailScreen
+                {...props}
+                username={this.state.username}
+                onLogin={this.onLogin} />
+            }}/>         
+        </div>
+      </Router>
+     
     );
   }
 }

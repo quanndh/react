@@ -12,13 +12,19 @@ const authRouter = require("./modules/api/auth/router");
 
 app.use((req, res, next) => {
   res.setHeader("X-Frame-Options", "ALLOWALL");
-  const acceptOrigins = ["http://localhost:3000", "http://localhost:6969"]
-  res.setHeader("Access-Control-Allow-Origin", acceptOrigins[0]);
+
+  if(req.headers.origin){
+    res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
+  }
+
+ 
   res.setHeader(
     "Access-Control-Allow-Methods",
     "POST, GET, PUT, DELETE, OPTIONS"
   );
+
   res.setHeader("Access-Control-Allow-Credentials", true);
+  
   res.setHeader(
     "Access-Control-Allow-Headers",
     "Authorization, Origin, X-Requested-With, Content-Type, Accept"
@@ -44,6 +50,12 @@ app.use(bodyParser.json({ extended: false }));
 app.use("/api/auth", authRouter);
 app.use("/api/images", imageRouter);
 app.use("/api/users", userRouter);
+
+app.use(express.static("./public"));
+
+app.get("/", (resq, res) => {
+  res.sendFile(__dirname + "/build/index.html")
+})
 
 app.get("/", (req, res) => {
   res.status(404).send("404 NOT FOUND");
