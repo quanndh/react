@@ -120,8 +120,6 @@ const getImageData = id =>
 
 const addComment = (imageId, { userId, content }) =>
   new Promise((resolve, reject) => {
-    console.log("User id")
-    console.log(userId);
     console
     imageModel
       .update(

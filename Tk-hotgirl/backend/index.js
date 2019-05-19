@@ -53,7 +53,7 @@ app.use("/api/users", userRouter);
 
 app.use(express.static("./public"));
 
-app.get("/", (resq, res) => {
+app.get("/", (req, res) => {
   res.sendFile(__dirname + "/build/index.html")
 })
 
